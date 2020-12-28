@@ -46,8 +46,8 @@ int main(void){
     pthread_t threads[threadsCount];
     pthread_mutex_init(&mutex, NULL);
     pthread_cond_init(&pthreadCond, NULL);
-    pthread_create(&threads[0], NULL, writer, NULL);
     for (int i = 1; i < threadsCount; i++) pthread_create(&threads[i], NULL, reader,NULL);
+    pthread_create(&threads[0], NULL, writer, NULL);
     for (int i = 0; i < threadsCount; i++) pthread_join(threads[i], NULL);
     pthread_mutex_destroy(&mutex);
     return 0;
