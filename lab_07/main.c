@@ -33,7 +33,7 @@ void* writer(){
         if (rndm < 50) pthread_cond_broadcast(&pthreadCond);
         else pthread_cond_signal(&pthreadCond);
         pthread_mutex_unlock(&mutex);
-        sleep(1);
+        sleep(rand() % 5 + 1);
     }
 }
 

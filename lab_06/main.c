@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <stdlib.h>
 
 #define TRUE 1
 #define ARRAY_SIZE 100
@@ -27,7 +28,7 @@ void* writer(){
         if (recordNo < ARRAY_SIZE) buf[recordNo] = recordNo;
         printf("RECORD NO: %d\n",recordNo);
         pthread_rwlock_unlock(&rwlock);
-        sleep(1);
+        sleep(rand() % 5 + 1);
     }
 }
 

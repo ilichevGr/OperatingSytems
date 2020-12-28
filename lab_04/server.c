@@ -90,6 +90,11 @@ int main(void){
 		printf("Data sent!\n");
 		
 		*dataset = datatmp;
+		int semWait = semop(semID, &semw, 1);
+		if(semWait == -1){
+			printf("SEM_LOCK ERRNO: %d\n", errno);
+			exit(EXIT_FAILURE);
+		}
 		
 	}
 }

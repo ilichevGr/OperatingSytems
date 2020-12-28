@@ -6,8 +6,12 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 
+#define BUF_SIZE 1024
+#define MAX_BASE 36
+#define MIN_BASE 2
+
 char* itoa(int value, char* result, int base) {
-    if (base < 2 || base > 36) { *result = '\0'; return result; }
+    if (base < MIN_BASE || MAX_BASE > 36) { *result = '\0'; return result; }
 
     char* ptr = result, *ptr1 = result, tmp_char;
     int tmp_value;
@@ -51,10 +55,10 @@ int main (int argc, char * argv[]) {
         time(&rawtime);
         timeinfo = localtime(&rawtime);
         printf("This is a child process\n");
-        char buf[1024];
+        char buf[BUF_SIZE];
         int len;
         close(pipedes[1]);
-        while ((len = read(pipedes[0], buf, 1024)) != 0)
+        while ((len = read(pipedes[0], buf, BUF_SIZE)) != 0)
             write(2, buf, len);
         close(pipedes[0]);
         printf("Child time---> %s", asctime(timeinfo));

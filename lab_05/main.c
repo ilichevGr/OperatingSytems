@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <stdlib.h>
 
 #define TRUE 1
 #define ARRAY_SIZE 100
@@ -16,7 +17,7 @@ void* reader(){
         pthread_mutex_lock(&mutex);
         printf("TID: %d\nARRAY LENGTH: %d\n",(int)pthread_self(),buf[recordNo]);
         pthread_mutex_unlock(&mutex);
-        sleep(1);
+        sleep(3);
     }
 }
 
@@ -27,7 +28,7 @@ void* writer(){
         if (recordNo < ARRAY_SIZE) buf[recordNo] = recordNo;
         printf("RECORD NO: %d\n",recordNo);
         pthread_mutex_unlock(&mutex);
-        sleep(1);
+        sleep(rand() % 5 + 1);
     }
 }
 
