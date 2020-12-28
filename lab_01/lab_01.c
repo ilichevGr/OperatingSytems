@@ -5,7 +5,7 @@
 #include <sys/wait.h>
 
 void exitMessage(){
-	printf("Atexit\n");
+	printf("Atexit!\nPID: %d\n", getpid());
 }
 
 

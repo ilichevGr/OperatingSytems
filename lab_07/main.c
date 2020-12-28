@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <stdlib.h>
+#include <errno.h>
 
 #define TRUE 1
 #define ARRAY_SIZE 100
@@ -16,7 +17,11 @@ pthread_cond_t pthreadCond;
 void* reader(){
     while(TRUE){
         pthread_mutex_lock(&mutex);
-        pthread_cond_wait(&pthreadCond, &mutex);
+        int pthCondWait = pthread_cond_wait(&pthreadCond, &mutex);
+        if (pthCondWait != 0) {
+        printf("COND_WAIT ERRNO: %d\n",errno);
+        exit(EXIT_FAILURE);
+        }
         printf("TID: %d\nARRAY LENGTH: %d\n",(int)pthread_self(),buf[recordNo]);
         pthread_mutex_unlock(&mutex);
         sleep(1);

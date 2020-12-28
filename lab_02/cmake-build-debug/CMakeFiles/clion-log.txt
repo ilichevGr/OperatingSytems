@@ -1,1 +1,0 @@
-CMakeLists.txt not found in /home/bes/Desktop/OS/lab_02 Select CMakeLists.txt
